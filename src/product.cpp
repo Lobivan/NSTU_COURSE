@@ -12,20 +12,26 @@ char* Product::copy_char_arr(char* arr) const {
   return res;
 }
 
-bool Product::date_is_valid(char* date) const {
-  //
-}
-
 Product::Product()
     : _name(nullptr),
       _category(nullptr),
-      _arrival_date(nullptr),
+      _arrival_date({1, 1, 1}),
       _count(0),
       _price(0),
       _added_percent(0) {}
-Product::Product(char* name, char* category, char* arrival_date, size_t count,
-                 size_t price, size_t added_percent) {
+Product::Product(char* name, char* category, size_t count, Date arrival_date,
+                 size_t price, size_t added_percent)
+    : _count(count),
+      _arrival_date(arrival_date),
+      _price(price),
+      _added_percent(added_percent) {
   _name = copy_char_arr(name);
   _category = copy_char_arr(category);
+  if (!_arrival_date.is_valid()) throw std::invalid_argument("incorrect date!");
 }
-void Product::print() const { std::cout << "I am product\n"; }
+void Product::print() const {
+  std::cout << "Наименование: " << _name << " ;категория: " << _category
+            << " ;количество: " << _count << " ;дата поступления: "
+            << " ;цена: "
+            << " ;процент торговой надбавки:";
+}
