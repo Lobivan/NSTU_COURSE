@@ -29,9 +29,70 @@ Product::Product(char* name, char* category, size_t count, Date arrival_date,
   _category = copy_char_arr(category);
   if (!_arrival_date.is_valid()) throw std::invalid_argument("incorrect date!");
 }
-void Product::print() const {
-  std::cout << "Наименование: " << _name << " ;категория: " << _category
-            << " ;количество: " << _count << " ;дата поступления: "
-            << " ;цена: "
-            << " ;процент торговой надбавки:";
+Product::~Product() {
+  delete[] _name;
+  delete[] _category;
+  _name = nullptr;
+  _category = nullptr;
+}
+
+bool Product::operator==(const Product& other) const {
+  if (strcmp(_name, other._name) != 0 ||
+      strcmp(_category, other._category) != 0 ||
+      _arrival_date != other._arrival_date || _count != other._count ||
+      _price != other._price || _added_percent != other._added_percent) {
+    return false;
+  }
+  return true;
+}
+
+bool Product::operator<(const Product& other) const {
+  if (strcmp(_name, other._name) != 0) strcmp(_name, other._name) < 0;
+  if (strcmp(_category, other._category) != 0)
+    return strcmp(_category, other._category) < 0;
+  if (_price != other._price) _price < other._price;
+  if (_count != other._count) _count < other._count;
+  if (_arrival_date != other._arrival_date)
+    return _arrival_date < other._arrival_date;
+  return _added_percent < other._added_percent;
+}
+
+bool Product::operator>(const Product& other) const {
+  if (strcmp(_name, other._name) != 0) strcmp(_name, other._name) > 0;
+  if (strcmp(_category, other._category) != 0)
+    return strcmp(_category, other._category) > 0;
+  if (_price != other._price) _price > other._price;
+  if (_count != other._count) _count > other._count;
+  if (_arrival_date != other._arrival_date)
+    return _arrival_date > other._arrival_date;
+  return _added_percent > other._added_percent;
+}
+
+const char* const Product::get_name() const { return _name; }
+const char* const Product::get_category() const { return _category; }
+size_t Product::get_count() const { return _count; }
+Product::Date Product::get_date() const { return _arrival_date; }
+size_t Product::get_price() const { return _price; }
+size_t Product::get_added_percent() const { return _added_percent; }
+
+void Product::set_name(char* name) {
+  delete[] _name;
+  _name = copy_char_arr(name);
+}
+void Product::set_category(char* category) {
+  delete[] _category;
+  _category = copy_char_arr(category);
+}
+void Product::set_count(size_t count) { _count = count; }
+void Product::set_date(Product::Date& date) { _arrival_date = date; }
+void Product::set_price(size_t price) { _price = price; }
+void Product::set_added_percent(size_t added_percent) {
+  _added_percent = added_percent;
+}
+
+void Product::print() {
+  std::cout << "Наименование: " << _name << "; категория: " << _category
+            << "; количество: " << _count
+            << "; дата поступления: " << _arrival_date << "; цена: " << _price
+            << "; процент торговой надбавки:" << _added_percent;
 }
