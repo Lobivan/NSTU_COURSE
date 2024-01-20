@@ -78,6 +78,7 @@ class Product {
   bool operator==(const Product& other) const;
   bool operator<(const Product& other) const;
   bool operator>(const Product& other) const;
+  Product& operator=(const Product& other);
 
   const char* const get_name() const;
   const char* const get_category() const;

@@ -68,6 +68,18 @@ bool Product::operator>(const Product& other) const {
   return _added_percent > other._added_percent;
 }
 
+Product& Product::operator=(const Product& other) {
+  delete[] _name;
+  _name = copy_char_arr(other._name);
+  delete[] _category;
+  _category = copy_char_arr(other._category);
+  _count = other._count;
+  _arrival_date = other._arrival_date;
+  _price = other._price;
+  _added_percent = other._added_percent;
+  return *this;
+}
+
 const char* const Product::get_name() const { return _name; }
 const char* const Product::get_category() const { return _category; }
 size_t Product::get_count() const { return _count; }
