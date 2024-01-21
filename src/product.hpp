@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <iostream>
 #include <stdexcept>
 
@@ -36,6 +37,7 @@ class Product {
       _year = other._year;
       _month = other._month;
       _day = other._day;
+      return *this;
     }
     bool operator<(const Date& other) const {
       if (_year != other._year) return _year < other._year;
@@ -95,4 +97,7 @@ class Product {
   void set_added_percent(size_t added_percent);
 
   void print();
+
+  void writeBinary(std::ofstream& os);
+  void readBinary(std::ifstream& is);
 };
