@@ -33,3 +33,5 @@
 .vscode/settings.json
 .vscode/tasks.json
 src/main
+src/abc.dat
+src/warehouse

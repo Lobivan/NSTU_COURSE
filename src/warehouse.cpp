@@ -51,7 +51,7 @@ void Warehouse::pop() {
 }
 
 void Warehouse::push(Product& prod, int num) {
-  if (num < 0 || num >= size()) {
+  if (num < 0 || num > size()) {
     throw std::out_of_range("index out of range");
   }
 
