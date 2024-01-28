@@ -130,11 +130,9 @@ void count_invoice(Warehouse* w) {
   int* cs = new int[BUFFLEN];
   int amount = 0;
   int size = BUFFLEN;
-  std::cin.clear();
-  std::cin.ignore();
   std::cin >> std::skipws >> n;
   std::cin >> std::skipws >> c;
-  while (n != -1) {
+  while (n != -1 || c != -1) {
     if (amount == size) {
       int* tmp = new int[size + BUFFLEN];
       for (int i = 0; i < size; i++) tmp[i] = nums[i];
@@ -146,8 +144,8 @@ void count_invoice(Warehouse* w) {
       cs = tmp;
       size += BUFFLEN;
     }
-    nums[amount++] = n;
-    cs[amount++] = c;
+    nums[amount] = n - 1;
+    cs[amount++] = c - 1;
     std::cout << n << "+" << c << "\n";
     std::cin.clear();
     std::cin.ignore();
