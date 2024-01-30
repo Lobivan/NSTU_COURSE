@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <chrono>
 #include <iostream>
 
 #include "product.hpp"
@@ -160,6 +162,22 @@ void count_invoice(Warehouse* w) {
 
 void warehouse_menu() {
   Warehouse w;
+  {
+    int N = 20000;
+    using namespace std::chrono;
+    char na[] = "name";
+    char ca[] = "cat";
+    Product p(na, ca, 0, {1, 2, 3}, 100, 12);
+    for (int i = 0; i < N; i++) {
+      w.push(p);
+      p.set_count(rand() % 100000);
+    }
+    auto start = high_resolution_clock::now();
+    w.sort();
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start);
+    std::cout << "Время: " << duration.count() << " микро секунд\n";
+  }
   int num = 0;
   char c;
   while (num != 10) {
