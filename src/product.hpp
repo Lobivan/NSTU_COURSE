@@ -4,15 +4,18 @@
 #include <iostream>
 #include <stdexcept>
 
+// Класс товара
 class Product {
  public:
+  // Класс для работы с датой
   class Date {
    private:
-    int _year;
-    int _month;
-    int _day;
+    int _year;   // Год
+    int _month;  // Месяц
+    int _day;    // День
 
    public:
+    // Проверка даты на корректность
     bool is_valid() {
       if (_month < 1 || _day < 1 || _month > 12 || _day > 31) return false;
       return true;
@@ -21,6 +24,7 @@ class Product {
     Date(int day, int month, int year) : _day(day), _month(month), _year(year) {
       if (!is_valid()) throw std::invalid_argument("incorrect date!");
     };
+
     int get_year() const { return _year; }
     int get_month() const { return _month; }
     int get_day() const { return _day; }
@@ -33,6 +37,7 @@ class Product {
       _day = day;
       if (!is_valid()) throw std::invalid_argument("incorrect day!");
     }
+
     Date& operator=(const Date& other) {
       _year = other._year;
       _month = other._month;
@@ -69,6 +74,7 @@ class Product {
   size_t _price;          // цена
   size_t _added_percent;  // процент торговой надбавки
 
+  // метод для создания копии строки
   char* copy_char_arr(char* arr) const;
 
  public:
@@ -82,13 +88,14 @@ class Product {
   bool operator>(const Product& other) const;
   Product& operator=(const Product& other);
 
+  // Геттеры
   const char* const get_name() const;
   const char* const get_category() const;
   size_t get_count() const;
   Date get_date() const;
   size_t get_price() const;
   size_t get_added_percent() const;
-
+  // Сеттеры
   void set_name(char* name);
   void set_category(char* category);
   void set_count(size_t count);

@@ -2,6 +2,7 @@
 
 #include <cstring>
 
+// метод для создания копии строки
 char* Product::copy_char_arr(char* arr) const {
   size_t len = strlen(arr) + 1;
   char* res = new char[len];
